@@ -1,0 +1,46 @@
+################################################################################
+##
+## Start 20735B1 Platform configurtion
+##
+################################################################################
+################################################################################
+#  BT MPAF FRAMEWORK - Enable WICE_BT  Application
+################################################################################
+ENTRY "BT MPAF FRAMEWORK"
+{
+    "MPAF appEnableBitMask" = 0x00800000
+    "feature map" = 0x80000002
+    "MPAF NV max devinfo" = 0x1
+    "MPAF TRANS MODE" = 0x0
+    "MPAF PKT TYPE" = 0x19
+    "mm_Sbrk_Limit" = 0x0
+}
+
+# set BR link ACL pool to 0 to reduce dynamic memory footprint for OPUS CELT
+ENTRY "ACL Pool Configuration"
+{
+	"Host claim ACL Host to device size" = 1021
+       "ACL Host to device size" = 1092
+       "Unemployed entry"        = 0
+       "ACL Device to host size" =1068
+       "Host Claim ACL Host to device count" = 0
+       "ACL Host to device count" = 0
+       "ACL Device to host count" = 0
+}
+
+# set AA audio byte pool size to 0 to reduce dynamic memory footprint for OPUS CELT
+ENTRY "Audio Byte Pool Size"
+{
+        "AA byte pool size" = 0
+}
+
+# increase stack size for OPUS CELT encoder
+ENTRY "MPAF Thread Stack Size"
+{
+          "MPAF stack size" = 5376     #default is (896*4)
+}
+################################################################################
+##
+## End 20735B1 Platform configurtion
+##
+################################################################################
