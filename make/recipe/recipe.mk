@@ -83,6 +83,10 @@ CY_RECIPE_DEFINES?=\
 #
 # Includes construction
 #
+# macro to remove duplicate paths from INC lists, but preserve order of 1st instances
+define f_uniq_paths
+$(eval seen :=)$(foreach _,$1,$(if $(filter $(abspath $_),$(abspath ${seen})),,$(eval seen += $_)))${seen}
+endef
 # build COMPONENT includes with proper directory prefix
 CY_COMPONENT_PATHS=$(addprefix COMPONENT_,$(COMPONENTS))
 CY_COMPONENT_DISABLE_FILTERS=$(addprefix %/COMPONENT_,$(filter-out CY_DEFAULT_COMPONENT,$(DISABLE_COMPONENTS)))
@@ -98,7 +102,7 @@ CY_RECIPE_INCLUDES?=\
     $(CY_TOOLCHAIN_INCLUDES)\
     $(addprefix -I,$(INCLUDES))\
     $(addprefix -I,$(CY_SEARCH_APP_INCLUDES))\
-    $(addprefix -I,$(CY_COMPONENT_INCLUDES))
+    $(addprefix -I,$(call f_uniq_paths,$(CY_COMPONENT_INCLUDES)))
 #$(info CY_RECIPE_INCLUDES $(CY_RECIPE_INCLUDES))
 
 #
@@ -135,12 +139,13 @@ ifeq ($(LIBNAME),)
 CY_RECIPE_PREBUILD?=\
     bash --norc --noprofile\
     "$(CY_INTERNAL_BASELIB_PATH)/make/scripts/bt_pre_build.bash"\
-    "--shell=$(CY_MODUS_SHELL_DIR)"\
-    "--scripts=$(CY_INTERNAL_BASELIB_PATH)/make/scripts"\
-    "--defs=$(CY_CORE_LD_DEFS)"\
-    "--patch=$(CY_CORE_PATCH_SYMBOLS)"\
-    "--ld=$(CY_CONFIG_DIR)/$(APPNAME).ld"\
-    $(if $(VERBOSE),"--verbose"); CY_CMD_TERM=;
+    --shell="$(CY_MODUS_SHELL_DIR)"\
+    --scripts="$(CY_INTERNAL_BASELIB_PATH)/make/scripts"\
+    --defs="$(CY_CORE_LD_DEFS)"\
+    --patch="$(CY_CORE_PATCH_SYMBOLS)"\
+    --ld="$(CY_CONFIG_DIR)/$(APPNAME).ld"\
+    $(if $(findstring 1,$(DIRECT_LOAD)),--direct)\
+    $(if $(VERBOSE),--verbose); CY_CMD_TERM=;
 endif
 
 #
@@ -150,25 +155,51 @@ ifeq ($(LIBNAME),)
 CY_RECIPE_POSTBUILD?=\
     bash --norc --noprofile\
     "$(CY_INTERNAL_BASELIB_PATH)/make/scripts/bt_post_build.bash"\
-    "--shell=$(CY_MODUS_SHELL_DIR)"\
-    "--cross=$(CY_CROSSPATH)/arm-none-eabi-"\
-    "--scripts=$(CY_INTERNAL_BASELIB_PATH)/make/scripts"\
-    "--tools=$(CY_WICED_TOOLS_DIR)"\
-    "--builddir=$(CY_CONFIG_DIR)"\
-    "--elfname=$(APPNAME).elf"\
-    "--appname=$(APPNAME)"\
-    "--hdf=$(CY_CORE_HDF)"\
-    "--entry=$(CY_CORE_APP_ENTRY).entry"\
-    "--cgslist=$(CY_CORE_CGSLIST)"\
-    "--cgsargs=$(CY_CORE_CGS_ARGS)"\
-    "--btp=$(CY_CORE_BTP)"\
-    "--id=$(CY_CORE_HCI_ID)"\
-    "--overridebaudfile=$(CY_INTERNAL_BASELIB_PATH)/platforms/BAUDRATEFILE.txt"\
-    "--chip=$(CHIP)$(CHIP_REV)"\
-    "--target=$(TARGET)"\
-    "--minidriver=$(CY_CORE_MINIDRIVER)"\
-    "--failsafe=$(CY_CORE_FAIL_SAFE_CGS)"\
-    "--clflags=$(CY_CORE_APP_CHIPLOAD_FLAGS)"\
+    --shell="$(CY_MODUS_SHELL_DIR)"\
+    --cross="$(CY_CROSSPATH)/arm-none-eabi-"\
+    --scripts="$(CY_INTERNAL_BASELIB_PATH)/make/scripts"\
+    --tools="$(CY_WICED_TOOLS_DIR)"\
+    --builddir="$(CY_CONFIG_DIR)"\
+    --elfname="$(APPNAME).elf"\
+    --appname="$(APPNAME)"\
+    --hdf="$(CY_CORE_HDF)"\
+    --entry="$(CY_CORE_APP_ENTRY).entry"\
+    --cgslist="$(CY_CORE_CGSLIST)"\
+    --cgsargs="$(CY_CORE_CGS_ARGS)"\
+    --btp="$(CY_CORE_BTP)"\
+    --id="$(CY_CORE_HCI_ID)"\
+    --overridebaudfile="$(CY_INTERNAL_BASELIB_PATH)/platforms/BAUDRATEFILE.txt"\
+    --chip="$(CHIP)$(CHIP_REV)"\
+    --target="$(TARGET)"\
+    --minidriver="$(CY_CORE_MINIDRIVER)"\
+    --ds2_app="$(CY_DS2_APP_HEX)"\
+    --failsafe="$(CY_CORE_FAIL_SAFE_CGS)"\
+    --clflags="$(CY_CORE_APP_CHIPLOAD_FLAGS)"\
     --extras=$(CY_APP_OTA)$(APP_STATIC_DATA)$(CY_CORE_APP_XIP_EXTRA)$(CY_CORE_DS2_EXTRA)$(CY_CORE_DIRECT_LOAD)\
     $(if $(VERBOSE),"--verbose"); CY_CMD_TERM=;
 endif
+
+#
+# add dependency to ensure configurator sources generated before BSP projects are built
+#
+$(SEARCH_LIBS_AND_INCLUDES): gen_config
+
+#
+# add vscode informational message
+#
+ifeq ($(LIBNAME),)
+ifeq ($(CY_SECONDSTAGE),)
+vscode: vscode_bt_information
+endif
+endif
+
+vscode_bt_information:
+	@echo;\
+	echo "VSCode for $(TARGET) hardware debugging:";\
+	echo; \
+	echo " - Edit makefile (or override with command line) to build for hardware debug";\
+	echo "   by setting ENABLE_DEBUG=1.";\
+	echo " - Rebuild application, program, attach debugger.";\
+	echo " - Launch debugger with Run->Start debugging, or F5.";\
+	echo "See document \"WICED Hardware Debugging for Bluetooth Kits\" for details.";\
+	echo;

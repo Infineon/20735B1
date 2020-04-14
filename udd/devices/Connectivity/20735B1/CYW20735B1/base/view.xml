@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <baseview>
-  <shortsiliconid>0x00000000</shortsiliconid>
-  <familyid>0x000</familyid>
-  <major>0</major>
-  <minor>0</minor>
-  <mcu>CortexM4</mcu>
+  <mcu>
+  </mcu>
   <vendor>Cypress</vendor>
   <flash>0</flash>
   <ram>393216</ram>
   <package>60-QFN</package>
-  <pins>60</pins>
   <minvoltage>1620</minvoltage>
   <maxvoltage>3630</maxvoltage>
   <description>The CYW20735B1 device.</description>
