@@ -89,6 +89,8 @@ typedef struct{
     UINT32 toggle_count;
 } pwm_config_t;
 
+typedef pwm_config_t wiced_pwm_config_t;
+
 /******************************************************************************
 *** Function prototypes and defines.
 ******************************************************************************/

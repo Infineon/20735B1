@@ -70,13 +70,16 @@ enum CLK_SRC_SEL
 {
     ACLK0,
     ACLK1,
+	WICED_ACLK0 = ACLK0,
+	WICED_ACLK1 = ACLK1
 };
 
 // Available base clock frequencies.
 enum CLK_SRC_FREQ_SEL
 {
     ACLK_FREQ_1_MHZ,
-    ACLK_FREQ_24_MHZ
+    ACLK_FREQ_24_MHZ,
+	WICED_ACLK_FREQ_24_MHZ = ACLK_FREQ_24_MHZ
 };
 
 /******************************************************************************
