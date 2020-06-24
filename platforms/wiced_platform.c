@@ -1,5 +1,5 @@
 /*
- * Copyright 2020, Cypress Semiconductor Corporation or a subsidiary of
+ * Copyright 2016-2020, Cypress Semiconductor Corporation or a subsidiary of
  * Cypress Semiconductor Corporation. All Rights Reserved.
  *
  * This software, including source code, documentation and related
@@ -44,6 +44,7 @@ extern size_t button_count;
 extern size_t gpio_count;
 
 extern void wiced_app_hal_init(void );
+void init_cycfg_all(void);
 /* utility functions */
 
 /**
@@ -116,6 +117,9 @@ void wiced_platform_init(void)
     {
         wiced_hal_gpio_configure_pin(*platform_gpio[i].gpio, (platform_gpio[i].config), platform_gpio[i].default_state);
     }
+
+    /* any other personality-based initialization */
+    init_cycfg_all();
 
     /* disable watchdog, set up SWD, wait for attach if ENABLE_DEBUG */
     SETUP_APP_FOR_DEBUG_IF_DEBUG_ENABLED();

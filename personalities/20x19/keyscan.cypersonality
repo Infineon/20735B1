@@ -14,10 +14,10 @@
 
     <Repeat count="15">
       <ParamSignal port="ksi[$idx]" name="KSI$idx" group="Input Pins" visible="`${$idx &lt; Inputs &amp;&amp; hasVisibleOption(&quot;ksi[$idx]&quot;)}`" desc="Keyboard input $idx." canBeEmpty="`${$idx &gt;= Inputs}`" />
-	</Repeat>
+    </Repeat>
     <Repeat count="30">
       <ParamSignal port="kso[$idx]" name="KSO$idx" group="Output Pins" visible="`${$idx &lt; Outputs &amp;&amp; hasVisibleOption(&quot;kso[$idx]&quot;)}`" desc="Keyboard output $idx." canBeEmpty="`${$idx &gt;= Outputs}`" />
-	</Repeat>
+    </Repeat>
 
     <ParamString id="instNum" name="" group="" default="`${getInstNumber(&quot;keyscan&quot;)}`" visible="false" editable="false" desc="" />
   </Parameters>
@@ -25,6 +25,7 @@
   <DRCs/>
 
   <ConfigFirmware>
-
+    <!-- the keyscan init function -->
+    <ConfigInstruction value="wiced_hal_gpio_configure_pin(platform_gpio_pins[PLATFORM_GPIO_$idx].gpio_pin, GPIO_PULL_UP | GPIO_INPUT_ENABLE, GPIO_PIN_OUTPUT_LOW);" include="`${isBlockUsed(getBlockFromSignal(&quot;ksi[$idx]&quot;))}`" repeatCount="15" />
   </ConfigFirmware>
 </Personality>

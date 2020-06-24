@@ -71,7 +71,6 @@ sha2_starts                                      ,           SYMBOL ,      PUBLI
 sha2_update                                      ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #
 allowSlaveLatency                                ,           SYMBOL ,      PUBLIC,      0,                      ,              1
-pmu_Enable32KhzOscillator                        ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 BtTransportDetectionPollingRetryMax              ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 copyBdaToStream                                  ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 DEFAULT_SUPERVISION_TIMEOUT                      ,           SYMBOL ,      PUBLIC,      0,                      ,              1
@@ -90,9 +89,6 @@ rmulp_getLtchFromConnhandle                      ,           SYMBOL ,      PUBLI
 savedFullbootReason                              ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 slimboot_ext_wake_enable                         ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #
-# Wiced_hidd_lib Library
-emConInfo_devInfo                                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
-#
 # acd_audio_lib
 adcAudioFilterData                               ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 adc_advanced_audio_handler_enable                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
@@ -102,7 +98,6 @@ patch_autoInstall                                ,           SYMBOL ,      PUBLI
 PORT_Purge                                       ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 PORT_Read                                        ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 PORT_Write                                       ,           SYMBOL ,      PUBLIC,      0,                      ,              0
-sco_aud_init                                     ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 uECC_shared_secret                               ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 hw_sha2_engine                                   ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 aes_ecb_128_decrypt                              ,           SYMBOL ,      PUBLIC,      0,                      ,              0
@@ -115,8 +110,6 @@ GKI_dequeue                                      ,           SYMBOL ,      PUBLI
 GKI_enqueue                                      ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 GKI_getfirst                                     ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 GKI_queue_is_empty                               ,           SYMBOL ,      PUBLIC,      0,                      ,              0
-i2s_aud_inject_init                              ,           SYMBOL ,      PUBLIC,      0,                      ,              0
-i2s_aud_inject_enableI2SAudioInject              ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 #
 # iap
 #

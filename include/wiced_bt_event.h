@@ -1,5 +1,5 @@
 /*
- * Copyright 2020, Cypress Semiconductor Corporation or a subsidiary of
+ * Copyright 2016-2020, Cypress Semiconductor Corporation or a subsidiary of
  * Cypress Semiconductor Corporation. All Rights Reserved.
  *
  * This software, including source code, documentation and related
@@ -33,38 +33,77 @@
  /** @file
  *
  *  This implements the application-thread level event handling for WICED Apps
+ *
+ * \defgroup appthread Application Thread Serialization
+ * \ingroup  rtos
+ *
  */
 #ifndef __WICED_BT_EVENT_H__
 #define __WICED_BT_EVENT_H__
+
 #include "wiced.h"
+
+/** \cond INTERNAL */
+/******************************************************************************
+ * Global Enumerations definitions                                            *
+ ******************************************************************************/
 
  typedef enum
  {
      WICED_SERIALIZATION_EVENT = 1,
  }wiced_bt_internal_events_t;
 
- /* The serialization queue will have these callbacks */
+/** \endcond */
+
+/**
+* \addtogroup appthread
+* \{
+*/
+
+/******************************************************************************
+ * Global Data Structure definitions                                          *
+ ******************************************************************************/
+
+ /** Structure used in WICED stack to add callback and data into task queue.  The serialization queue will have these callbacks */
 typedef struct
 {
-    // The function to invoke in application thread context
-    int (*fn)(void*);
-
-    // Any arbitrary data to be given to the callback. wiced_app_event_serialize Caller has to allocate and free once serialized event handled
-    void* data;
+    int (*fn)(void*); /**< Callback invoked within the app thread context */
+    void* data; /**< Any arbitrary data to be given to the callback.  wiced_app_event_serialize Caller has to allocate and free once serialized event handled */
 } wiced_app_event_srzn_cb_t;
 
 
-/*
- *This function lets you serialize a call onto the application thread.
- *
- *@param[in]    fn          : serialized call back on serialization
- *
- *@param[in]    data        : data to be handled in serialized call
+/******************************************************************************
+ * Global functions                                                           *
+ ******************************************************************************/
 
- * @return      wiced_bool_t
 
- * Note: It is application's responsibility freeing data pointer
- */
-wiced_bool_t wiced_app_event_serialize( int (*fn)(void*), void* data);
+/*******************************************************************************
+* Function Name: wiced_app_event_serialize
+****************************************************************************//**
+*
+* This function lets you serialize a call onto the application thread, which
+* has been instantiated by the WICED stack and is used to interact with the
+* application in an event-based fashion. Once serialized, tasks are pushed onto
+* a task queue, where they are pulled based on pre-defined priority of the
+* application thread. The queue is 16 deep, but this is shared with the stack.
+ *
+* \param[in] fn         function to execute once dequeued from app thread
+* \param[in] data       pointer to non-local data to be sent as arg to callback
+ *
+* \return
+*  - WICED_TRUE indicates success
+*  - WICED_FALSE indicates failure
+*
+* \note
+* The data parameter must point to non-local data as the pointer will be
+* accessed after the current function returns.
+*
+* \note
+* Data will not be freed by stack. If allocated by app, must be freed by app.
+*
+*******************************************************************************/
+wiced_bool_t wiced_app_event_serialize( int (*fn)(void*), void* data );
+
+/** \} appthread */
 
 #endif //__WICED_BT_EVENT_H__

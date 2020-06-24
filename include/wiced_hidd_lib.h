@@ -1,5 +1,5 @@
 /*
- * Copyright 2020, Cypress Semiconductor Corporation or a subsidiary of
+ * Copyright 2016-2020, Cypress Semiconductor Corporation or a subsidiary of
  * Cypress Semiconductor Corporation. All Rights Reserved.
  *
  * This software, including source code, documentation and related
@@ -223,6 +223,10 @@ enum wiced_hidd_pwmbuz_freq_e
 /*******************************************************
 ******common APIs for BR/EDR/LE (wiced_hidd_xxx) **********
 *******************************************************/
+/**
+ * @addtogroup    wiced_bt_hid     Human Interface Device (HID)
+ * @ingroup     wicedbt
+*/
 
 /**
  *  @addtogroup  hidd_functions      HIDD Library API
