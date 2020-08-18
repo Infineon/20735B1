@@ -93,6 +93,10 @@ slimboot_ext_wake_enable                         ,           SYMBOL ,      PUBLI
 adcAudioFilterData                               ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 adc_advanced_audio_handler_enable                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 #
+# audio Opus Celt encoding
+CELT_Encoder_Init                                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
+CELT_Encoder                                     ,           SYMBOL ,      PUBLIC,      0,                      ,              0
+#
 # audio
 patch_autoInstall                                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 PORT_Purge                                       ,           SYMBOL ,      PUBLIC,      0,                      ,              0
@@ -144,6 +148,7 @@ p_256_init_curve                                  , SYMBOL, PUBLIC, 0, , 1
 #
 # hid
 #
+adc_pdm_pinconfig                                , SYMBOL, PUBLIC, 0, , 1
 adcConfig                                        , SYMBOL, PUBLIC, 0, , 1
 adc_audioConfig                                  , SYMBOL, PUBLIC, 0, , 1
 adc_config                                       , SYMBOL, PUBLIC, 0, , 1
