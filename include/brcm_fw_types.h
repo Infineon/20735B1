@@ -42,8 +42,8 @@
 #define _BRCM_FW_TYPES_H_
 
 
-#include <stddef.h>
-#include <assert.h>
+//#include <stddef.h>
+//#include <assert.h>
 
 //==================================================================================================
 // Prefix header for build flags.  This will be created by the build process, in the build output

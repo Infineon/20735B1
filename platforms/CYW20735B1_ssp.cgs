@@ -1,0 +1,21 @@
+################################################################################
+##
+## 20735B1 SSP Platform configurtion
+##
+################################################################################
+ENTRY "ACL Pool Configuration"
+{
+	"Host claim ACL Host to device size"    = 1021
+    "ACL Host to device size"               = 1092
+    "Unemployed entry"                      = 0
+    "ACL Device to host size"               = 1064
+    "Host Claim ACL Host to device count"   = 8
+    "ACL Host to device count"              = 16
+    "ACL Device to host count"              = 4
+}
+
+################################################################################
+##
+## End 20735B1 SSP Platform configurtion
+##
+################################################################################

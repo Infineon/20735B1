@@ -153,6 +153,7 @@ wiced_thread_t*  wiced_rtos_create_thread( void );
  */
 wiced_result_t wiced_rtos_init_thread( wiced_thread_t* thread, uint8_t priority, const char* name, wiced_thread_function_t function, uint32_t stack_size, void* arg );
 
+#ifdef WICED_RTOS_D
 /** Deletes a terminated thread
  *
  * @param thread     : the handle of the thread to delete
@@ -161,6 +162,8 @@ wiced_result_t wiced_rtos_init_thread( wiced_thread_t* thread, uint8_t priority,
  * @return    WICED_ERROR   : if an error occurred
  */
 wiced_result_t wiced_rtos_delete_thread( wiced_thread_t* thread );
+
+#endif // WICED_RTOS_D
 
 /** Checks if there is a stackoverflow
  *
@@ -296,6 +299,7 @@ wiced_worker_thread_t* wiced_rtos_create_worker_thread(void);
  */
 wiced_result_t wiced_rtos_init_worker_thread( wiced_worker_thread_t* worker_thread, uint8_t priority, uint32_t stack_size, uint32_t event_queue_size );
 
+#ifdef WICED_RTOS_D
 /** Deletes a worker thread
  *
  * Deletes a worker thread
@@ -306,6 +310,8 @@ wiced_result_t wiced_rtos_init_worker_thread( wiced_worker_thread_t* worker_thre
  * @return    WICED_ERROR   : if an error occurred
  */
 wiced_result_t wiced_rtos_delete_worker_thread( wiced_worker_thread_t* worker_thread );
+
+#endif // WICED_RTOS_D
 
 /** @} */
 /*****************************************************************************/
@@ -369,6 +375,7 @@ wiced_result_t wiced_rtos_set_semaphore( wiced_semaphore_t* semaphore );
 wiced_result_t wiced_rtos_get_semaphore( wiced_semaphore_t* semaphore, uint32_t timeout_ms );
 
 
+#ifdef WICED_RTOS_D
 /** De-initialise a semaphore
  *
  * Deletes a semaphore created with @ref wiced_rtos_init_semaphore
@@ -379,6 +386,8 @@ wiced_result_t wiced_rtos_get_semaphore( wiced_semaphore_t* semaphore, uint32_t 
  * @return    WICED_ERROR   : if an error occurred
  */
 wiced_result_t wiced_rtos_deinit_semaphore( wiced_semaphore_t* semaphore );
+
+#endif // WICED_RTOS_D
 
 /** @} */
 /*****************************************************************************/
@@ -445,6 +454,7 @@ wiced_result_t wiced_rtos_lock_mutex( wiced_mutex_t* mutex );
 wiced_result_t wiced_rtos_unlock_mutex( wiced_mutex_t* mutex );
 
 
+#ifdef WICED_RTOS_D
 /** De-initialise a mutex
  *
  * Deletes a mutex created with @ref wiced_rtos_init_mutex
@@ -456,6 +466,7 @@ wiced_result_t wiced_rtos_unlock_mutex( wiced_mutex_t* mutex );
  */
 wiced_result_t wiced_rtos_deinit_mutex( wiced_mutex_t* mutex );
 
+#endif // WICED_RTOS_D
 
 /** @} */
 /*****************************************************************************/
@@ -533,6 +544,7 @@ wiced_result_t wiced_rtos_push_to_queue( wiced_queue_t* queue, void* message, ui
 wiced_result_t wiced_rtos_pop_from_queue( wiced_queue_t* queue, void* message, uint32_t timeout_ms );
 
 
+#ifdef WICED_RTOS_D
 /** De-initialise a queue
  *
  * Deletes a queue created with @ref wiced_rtos_init_queue
@@ -544,6 +556,7 @@ wiced_result_t wiced_rtos_pop_from_queue( wiced_queue_t* queue, void* message, u
  */
 wiced_result_t wiced_rtos_deinit_queue( wiced_queue_t* queue );
 
+#endif // WICED_RTOS_D
 
 /** Check if a queue is empty
  *
@@ -643,6 +656,7 @@ wiced_result_t wiced_rtos_start_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTO
 wiced_result_t wiced_rtos_stop_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
 
 
+#ifdef WICED_RTOS_D
 /** De-initialise a RTOS timer
  *
  * Deletes a RTOS timer created with @ref wiced_rtos_init_timer
@@ -654,6 +668,7 @@ wiced_result_t wiced_rtos_stop_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS
  */
 wiced_result_t wiced_rtos_deinit_timer( wiced_rtos_timer_t* timer ) DEPRECATE_RTOS_TIMER;
 
+#endif // WICED_RTOS_D
 
 /** Check if an RTOS timer is running
  *
@@ -697,6 +712,7 @@ wiced_result_t wiced_rtos_is_timer_running( wiced_rtos_timer_t* timer ) DEPRECAT
 wiced_result_t wiced_rtos_register_timed_event( wiced_timed_event_t* event_object, wiced_worker_thread_t* worker_thread, event_handler_t function, uint32_t time_ms, void* arg );
 
 
+#ifdef WICED_RTOS_D
 /** Removes a request for a regular function execution
  *
  * This function de-registers a function that has previously been set-up
@@ -709,6 +725,7 @@ wiced_result_t wiced_rtos_register_timed_event( wiced_timed_event_t* event_objec
  */
 wiced_result_t wiced_rtos_deregister_timed_event( wiced_timed_event_t* event_object );
 
+#endif // WICED_RTOS_D
 
 /** Sends an asynchronous event to the associated worker thread
  *
@@ -782,6 +799,7 @@ wiced_result_t wiced_rtos_wait_for_event_flags( wiced_event_flags_t* event_flags
 wiced_result_t wiced_rtos_set_event_flags( wiced_event_flags_t* event_flags, uint32_t flags_to_set );
 
 
+#ifdef WICED_RTOS_D
 /** De-initialise an event flags
  *
  * @param event_flags : a pointer to the event flags handle
@@ -790,6 +808,8 @@ wiced_result_t wiced_rtos_set_event_flags( wiced_event_flags_t* event_flags, uin
  * @return    WICED_ERROR   : if an error occurred
  */
 wiced_result_t wiced_rtos_deinit_event_flags( wiced_event_flags_t* event_flags );
+
+#endif // WICED_RTOS_D
 
 //! Minimum value for the thread priority range.
 #define THREAD_PRIORITY_MIN            1

@@ -1004,6 +1004,7 @@ wiced_bool_t wiced_bt_l2cap_get_peer_features (wiced_bt_device_address_t bd_addr
  */
 wiced_bool_t wiced_bt_l2cap_get_bdaddrby_handle (uint16_t handle, wiced_bt_device_address_t bd_addr);
 
+#ifdef WICED_BT_L2CAP_GET_HANDLEBY_BDADDR_SUPPORTED
 /**
  *
  *  Function         wiced_bt_l2cap_get_handleby_bdaddr
@@ -1017,6 +1018,7 @@ wiced_bool_t wiced_bt_l2cap_get_bdaddrby_handle (uint16_t handle, wiced_bt_devic
  */
 uint16_t wiced_bt_l2cap_get_handleby_bdaddr(BD_ADDR peer_bda);
 
+#endif // WICED_BT_L2CAP_GET_HANDLEBY_BDADDR_SUPPORTED
 
 /**
  *

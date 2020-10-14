@@ -271,6 +271,14 @@ typedef struct
     wiced_bt_remote_name_t          remote_bd_name;     /**< Remote device name */
 }wiced_bt_dev_remote_name_result_t;
 
+/* Structure returned with switch role request */
+typedef struct
+{
+    uint8_t                         status;             /**< Status of the operation */
+    uint8_t                         role;               /**< BTM_ROLE_MASTER or BTM_ROLE_SLAVE */
+    wiced_bt_device_address_t       bd_addr;            /**< Remote BD address involved with the switch */
+} wiced_bt_dev_switch_role_result_t;
+
 /*****************************************************************************
  *  SECURITY MANAGEMENT
  *****************************************************************************/
@@ -1734,6 +1742,44 @@ void wiced_bt_set_local_bdaddr( wiced_bt_device_address_t  bda , wiced_bt_ble_ad
 wiced_result_t wiced_bt_dev_get_role( wiced_bt_device_address_t remote_bd_addr, UINT8 *p_role, wiced_bt_transport_t transport );
 
 /**
+ * Function         wiced_bt_dev_switch_role
+ *
+ *                  This function is called to switch the role between master and
+ *                  slave.  If role is already set it will do nothing. If the
+ *                  command was initiated, the callback function is called upon
+ *                  completion.
+ *
+ * @param[in]       remote_bd_addr      : BD address of remote device
+ * @param[in]       new_role            : New role (BTM_ROLE_MASTER or BTM_ROLE_SLAVE)
+ * @param[in]       p_cback             : Result callback (wiced_bt_dev_switch_role_result_t will be passed to the callback)
+
+ *
+ * @return      wiced_result_t
+ *              WICED_BT_SUCCESS if already in specified role.
+ *              WICED_BT_CMD_STARTED if command issued to controller.
+ *              WICED_BT_NO_RESOURCES if couldn't allocate memory to issue command
+ *              WICED_BT_UNKNOWN_ADDR if no active link with bd addr specified
+ *              WICED_BT_MODE_UNSUPPORTED if local device doesn't support role switching
+ */
+wiced_result_t BTM_SwitchRole(wiced_bt_device_address_t remote_bd_addr, uint8_t new_role, wiced_bt_dev_cmpl_cback_t *p_cb);
+#define wiced_bt_dev_switch_role BTM_SwitchRole
+
+/**
+ * Function     wiced_bt_dev_set_link_supervision_timeout
+ *
+ *              set Link Supervision Timeout
+ *
+ * @param[in]   remote_bd_addr   : BD address of remote device
+ * @param[in]   timeout          :
+ *
+ * @return      WICED_BT_PENDING if successfully initiated, otherwise error.
+ *
+ */
+wiced_result_t BTM_SetLinkSuperTout(wiced_bt_device_address_t remote_bd_addr, uint16_t timeout);
+#define wiced_bt_dev_set_link_supervision_timeout BTM_SetLinkSuperTout
+
+#if GATT_OVER_BREDR_INCLUDED == TRUE
+/**
  * Function         wiced_bt_dev_get_security_state
  *
  *                  Get security flags for the device
@@ -1745,6 +1791,7 @@ wiced_result_t wiced_bt_dev_get_role( wiced_bt_device_address_t remote_bd_addr, 
  *
  */
 wiced_bool_t wiced_bt_dev_get_security_state(wiced_bt_device_address_t bd_addr, uint8_t *p_sec_flags);
+#endif
 
 /**
  * Function         wiced_bt_get_identity_address
@@ -1886,6 +1933,7 @@ wiced_bt_dev_status_t wiced_bt_dev_link_quality_stats(BD_ADDR bda, wiced_bt_tran
 **/
 wiced_result_t  wiced_bt_dev_get_remote_name (wiced_bt_device_address_t bd_addr, wiced_bt_remote_name_cback_t *p_remote_name_result_cback);
 
+#ifdef WICED_BT_COEX_SUPPORT
 /**
 * Function         wiced_bt_coex_enable
 *
@@ -1908,6 +1956,25 @@ wiced_result_t wiced_bt_coex_enable( uint8_t seci_in_pin, uint8_t seci_out_pin )
  *
  */
 void wiced_bt_coex_disable( void );
+
+#define wiced_bt_dev_set_link_policy BTM_SetLinkPolicy
+/**
+ * Function         wiced_bt_dev_set_link_policy
+ *
+ *                  This function is called to set the Link Policy for remote device
+ *
+ * @param[in]       remote_bda      : remote device's address
+ * @param[in/out]   settings        : pointer to the settings value.
+ *                                    the policy setting is defined in hcidefs.h
+ *                                    if the input setting consists of unsupport feature
+ *                                    for local device, it will be cleared
+ *
+ * @return          wiced_result_t
+*/
+wiced_result_t wiced_bt_dev_set_link_policy(wiced_bt_device_address_t remote_bda,
+        uint16_t *settings);
+
+#endif // WICED_BT_COEX_SUPPORT
 
 #ifdef __cplusplus
 }
