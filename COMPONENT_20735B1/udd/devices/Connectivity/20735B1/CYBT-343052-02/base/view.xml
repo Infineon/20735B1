@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<baseview>
+  <mcu>CortexM4</mcu>
+  <vendor>Cypress</vendor>
+  <flash>524288</flash>
+  <ram>393216</ram>
+  <package>42-SMT</package>
+  <minvoltage>2500</minvoltage>
+  <maxvoltage>3600</maxvoltage>
+  <description>The CYBT-343052-02 device.</description>
+</baseview>

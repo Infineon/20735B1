@@ -46,6 +46,7 @@ osapi_deactivateTimer                            ,           SYMBOL ,      PUBLI
 rmulp_constInfo                                  ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 wdog_generate_hw_reset                           ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 rtcConfig                                        ,           SYMBOL ,      PUBLIC,      0,                      ,              1
+slist_get                                        ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #
 wiced_*                                          ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 #
@@ -94,6 +95,7 @@ slimboot_ext_wake_enable                         ,           SYMBOL ,      PUBLI
 # adc_audio_lib
 adcAudioFilterData                               ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 adc_advanced_audio_handler_enable                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
+useWicedPDMAudio                                 ,           SYMBOL ,      PUBLIC,      0,                      ,              0
 #
 # audio Opus Celt encoding
 CELT_Encoder_Init                                ,           SYMBOL ,      PUBLIC,      0,                      ,              0
@@ -163,6 +165,7 @@ adc_audioConfig                                  , SYMBOL, PUBLIC, 0, , 1
 adc_config                                       , SYMBOL, PUBLIC, 0, , 1
 adc_startAudio                                   , SYMBOL, PUBLIC, 0, , 1
 adc_stopAudio                                    , SYMBOL, PUBLIC, 0, , 1
+adc_stopAudio_fix                                , SYMBOL, PUBLIC, 0, , 1
 adc_audioDrcSettings                             , SYMBOL, PUBLIC, 0, , 1
 adc_assignFilterData                             , SYMBOL, PUBLIC, 0, , 1
 custom_gain_boost                                , SYMBOL, PUBLIC, 0, , 1
@@ -174,6 +177,22 @@ legattdb_regWriteHandleCb                        , SYMBOL, PUBLIC, 0, , 1
 sfi_exit_deep_power_down                         , SYMBOL, PUBLIC, 0, , 1
 sfi_enter_deep_power_down                        , SYMBOL, PUBLIC, 0, , 1
 pmu_attemptSleepState                            , SYMBOL, PUBLIC, 0, , 1
+#
+# irtx
+#
+irtx_doneInterruptHandler      , SYMBOL, PUBLIC, 2, wiced_irtx_doneInterruptHandler, 1
+irtx_doneHandler               , SYMBOL, PUBLIC, 2, wiced_irtx_doneHandler, 1
+irtx_updateBufferControl       , SYMBOL, PUBLIC, 2, wiced_irtx_updateBufferControl, 1
+irtx_configure                 , SYMBOL, PUBLIC, 2, wiced_irtx_configure, 1
+irtx_init                      , SYMBOL, PUBLIC, 2, wiced_irtx_init, 1
+irtx_processTxData             , SYMBOL, PUBLIC, 2, wiced_irtx_processTxData, 1
+irtx_setIrTxPortPin            , SYMBOL, PUBLIC, 2, wiced_irtx_setIrTxPortPin, 1
+irtx_isAvailable               , SYMBOL, PUBLIC, 2, wiced_irtx_isAvailable, 1
+irtx_abortCurrentTransaction   , SYMBOL, PUBLIC, 2, wiced_irtx_abortCurrentTransaction, 1
+irtx_sendData                  , SYMBOL, PUBLIC, 2, wiced_irtx_send_data, 1
+Irtx_processTxData_PreHook     , SYMBOL, PUBLIC, 2, wiced_irtx_processTxData_PreHook, 1
+Irtx_processTxData_PostHook    , SYMBOL, PUBLIC, 2, wiced_irtx_processTxData_PostHook, 1
+Irtx_processTxData_CompleteHook, SYMBOL, PUBLIC, 2, wiced_irtx_processTxData_CompleteHook, 1
 #
 # general
 __2sprintf                                        , SYMBOL, PUBLIC, 0, , 1
