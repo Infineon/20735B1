@@ -43,6 +43,17 @@
 
 #include "brcm_fw_types.h"
 
+typedef enum{
+    PARITY_ODD,
+    PARITY_EVEN,
+    PARITY_NONE
+}parity_t;
+
+typedef enum{
+    STOP_BIT_1,
+    STOP_BIT_2
+}stop_bit_t;
+
 /****************************************************************************/
 /**
  * @addtogroup  HardwareDrivers Hardware Drivers
@@ -297,6 +308,22 @@ void wiced_hal_puart_register_interrupt(void (*puart_rx_cbk)(void*));
 /// \return none
 ///////////////////////////////////////////////////////////////////////////////
 void wiced_hal_puart_set_watermark_level(UINT32 watermark_level);
+
+/******************************************************************************
+* Function Name: wiced_hal_puart_configuration
+***************************************************************************//**
+* updates the baudrate, parity and stop bits as per received value
+* \param baudrate - Desired rate in symbols/sec ex. 9600
+* \param parity   - PARITY_ODD for odd parity, PARITY_EVEN for even parity,
+*                   PARITY_NONE for no parity.
+* \param stop_bit - STOP_BIT_1 for 1 stop bit, STOP_BIT_2 for 2 stop bits.
+*
+* \return BOOL32  - TRUE if the configuration was successfully set, FALSE
+*                   otherwise.NOTE: For baudrate greater than 2.727272 Mb/sec
+*                   use of 2 stop bits is mandatory due to hardware
+*                   limitation.
+********************************************************************************/
+BOOL32 wiced_hal_puart_configuration(UINT32 baudrate, parity_t parity, stop_bit_t stop_bit);
 
 /* @} PUARTDriver */
 /* @} HardwareDrivers */

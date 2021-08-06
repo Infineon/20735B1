@@ -1,10 +1,61 @@
 # Place a '#' in the first column to indicate a comment
 #
+# This file defines OVERRIDE rules for PATCH and LIBRARY symbols.
 # Each symbol defined below is used in conjunction with the elf file symbol tables.
 #
+#
+# Comma Seperated Value file
+#
+# Name,     Type,     Visibility,     Rename Flag,     Rename Name,     Reserved Flag,
+#
+# Definitions
+#   Name
+#     <symbol name>    Name of exact symbol to find and modify (may exist in multiple elf files)
+#     <wildcard>       Wildcard is allowed.
+#                          *     match all SYMBOLS after this location in the name.    ie.  <wiced_*>
+#                                Sections are NOT supported at the moment with wildcards
+#     !~<wildcard>     Wildcard is explicitly not public (screened).
+#
+#                      Name is CASE-SENSITIVE and WHITE SPACE IN-sensitive at beginning or end of name.
+#
+#   Type
+#     SECTION          Indicates this entry applies to a Symbol (Function or Object) in the elf file
+#     SYMBOL           Indicates this entry applies to 1 or more sections of the same name
+#
+#   Visibility Status
+#     PUBLIC           Symbol will be exported and will be in the open (never mangled)
+#     no value         Defaults to NOT public, no symbol in .sym file
+#
+#   Rename Flag
+#     0        => No mangling will occur, use real name
+#     2        => Override symbol name with new name
+#     No Value => Defaults to 0
+#
+#   Rename Name
+#     No Value => Use Name
+#     Value    => Use the supplied value as the new name for the entry
+#                 1st char MUST be a letter
+#
 #####################################################################################################################################
-# Symbols
-########################################################################################################
+# Name,                                                        Type ,      Status,  Rename Flag,     Rename Name,     Reserved Flag,
+#
+# public API renames
+#
+wiced_blehidd_get_slave_latency                  ,           SYMBOL ,      PUBLIC,      2, wiced_blehidd_get_peripheral_latency,       1
+wiced_blehidd_allow_slave_latency                ,           SYMBOL ,      PUBLIC,      2, wiced_blehidd_allow_peripheral_latency,     1
+wiced_blehidd_set_asym_slave_latency             ,           SYMBOL ,      PUBLIC,      2, wiced_blehidd_set_asym_peripheral_latency,  1
+wiced_bt_allowSlaveLatency                       ,           SYMBOL ,      PUBLIC,      2, wiced_bt_allowPeripheralLatency,            1
+allowSlaveLatency                                ,           SYMBOL ,      PUBLIC,      2, allowPeripheralLatency,                     1
+rbg_get_psrng                                    ,           SYMBOL,       PUBLIC,      2, wiced_hal_get_pseudo_rand_number,           1
+bcsulp_AES                                       ,           SYMBOL,       PUBLIC,      2, wiced_bcsulp_AES,                           1
+wiced_bt_ble_update_advertising_white_list       ,           SYMBOL,       PUBLIC,      2, wiced_bt_ble_update_advertising_filter_accept_list, 1
+wiced_bt_ble_get_white_list_size                 ,           SYMBOL,       PUBLIC,      2, wiced_bt_ble_get_filter_accept_list_size,   1
+wiced_bt_ble_clear_white_list                    ,           SYMBOL,       PUBLIC,      2, wiced_bt_ble_clear_filter_accept_list,      1
+wiced_bt_ble_update_scanner_white_list           ,           SYMBOL,       PUBLIC,      2, wiced_bt_ble_update_scanner_filter_list,    1
+sha2_hmac                                        ,           SYMBOL,       PUBLIC,      2, wiced_sha2_hmac,                            1
+#
+# Generic
+#
 __aeabi_memclr                                   ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 __aeabi_memcpy                                   ,           SYMBOL ,      PUBLIC,      0,                      ,              1
 __aeabi_uldivmod                                 ,           SYMBOL ,      PUBLIC,      0,                      ,              1
