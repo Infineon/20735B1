@@ -47,16 +47,16 @@
 
 /*************************************************************************/
 /**
- *  @addtogroup  Result         WICED Result Codes
+ *  @addtogroup  Result         AIROC Result Codes
  *  @ingroup     wicedsys
  *
- *  <b> WICED Result list </b> for Bluetooth BR/EDR and LE @b .
+ *  <b> AIROC Result list </b> for Bluetooth BR/EDR and LE @b .
  *
  *  @{
  */
 /*************************************************************************/
 
-/** WICED result list */
+/** AIROC result list */
 #define WICED_RESULT_LIST( prefix ) \
     RESULT_ENUM( prefix, SUCCESS,                       0x00 ),   /**< Success */                        \
     RESULT_ENUM( prefix, DELETED                       ,0x01 ),   \
@@ -128,7 +128,7 @@
     RESULT_ENUM( prefix, ALREADY_INITIALIZED,           0x42),   /**< Already initialized*/ \
     RESULT_ENUM( prefix, FEATURE_NOT_ENABLED           ,0xFF ),   \
 
-/**@}  WICED result list */
+/**@}  AIROC result list */
 
 #define FILESYSTEM_RESULT_LIST( prefix ) \
         RESULT_ENUM( prefix, SUCCESS,                   10000 ),   /**< Success */               \
@@ -156,7 +156,7 @@
 
 /*************************************************************************/
 /**
- *  @addtogroup  Result       WICED Result Codes
+ *  @addtogroup  Result       AIROC Result Codes
  *  @ingroup     gentypes
  *
  *  <b> Result types </b> @b .
@@ -164,7 +164,7 @@
  *  @{
  */
 /*************************************************************************/
-/** WICED result */
+/** AIROC result */
 typedef enum
 {
     WICED_RESULT_LIST(WICED_)                 /**< Generic Error */
@@ -172,7 +172,7 @@ typedef enum
     FILESYSTEM_RESULT_LIST( WICED_FILESYSTEM_ )      /* 10000 - 10999 */
 } wiced_result_t;
 
-/**@}  WICED Result */
+/**@}  AIROC Result */
 
 /******************************************************
  *            Structures

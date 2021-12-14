@@ -45,7 +45,7 @@
  *
  * @defgroup wicedbt      Bluetooth
  *
- * WICED Bluetooth Framework Functions
+ * AIROC Bluetooth Framework Functions
  */
 
 #pragma once
@@ -429,7 +429,7 @@ typedef struct
 /** BR/EDR pairing complete infomation */
 typedef struct
 {
-    uint8_t         status;                 /**< status of the simple pairing process (see defintions for HCI status codes) */
+    uint8_t         status;                 /**< status of the simple pairing process (See standard HCI error codes. Please refer Bluetooth version 5.2, volume 1, part F for CONTROLLER ERROR CODES) */
 } wiced_bt_dev_br_edr_pairing_info_t;
 
 /** BLE pairing complete infomation */
@@ -1767,7 +1767,6 @@ wiced_bool_t wiced_bt_get_identity_address(wiced_bt_device_address_t bd_addr, wi
  *  Command to set the tx power on link
  *
  * @param[in]       bd_addr       : peer address
- *                                  To set Adv Tx power keep bd_addr NULL
  * @param[in]       power          :  power value in db (min:-24 max:4)
  *
  * @return          wiced_result_t
@@ -1943,6 +1942,21 @@ wiced_result_t wiced_bt_dev_set_link_policy(wiced_bt_device_address_t remote_bda
 */
 
 wiced_result_t wiced_bt_set_device_class(wiced_bt_dev_class_t dev_class);
+
+/**
+ * Function         wiced_bt_dev_set_local_name
+ *
+ * Set the device local name
+ *
+ * @param[out]      p_name        : Local device name
+ *
+ * @return          wiced_result_t
+ *
+ *                  WICED_BT_PENDING        command initiated successfully
+ *                  WICED_BT_DEV_RESET      device not in the right state to execute the command
+ *                  WICED_BT_NO_RESOURCES   no resources to issue command
+ */
+wiced_result_t wiced_bt_dev_set_local_name( char* p_name );
 
 #ifdef __cplusplus
 }

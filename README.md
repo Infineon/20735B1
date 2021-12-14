@@ -3,18 +3,18 @@
 
 ## Overview
 
-The Infineon CYW20735 is an ultra-low-power dual-mode Bluetooth 5.0 wireless MCU device. It has a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting BR and LE. EDR is not supported.
+The Infineon CYW20735 is an ultra-low-power dual-mode Bluetooth&#174; 5.0 wireless MCU device. It has a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting BR and LE. EDR is not supported.
 
 ## SDK Software Features
-- Dual mode Bluetooth stack included in the ROM (BR and LE, no EDR).
-- BT stack and profile level APIs for embedded BT application development.
-- WICED HCI protocol to simplify host/MCU application development.
+- Dual mode Bluetooth&#174; stack included in the ROM (BR and LE, no EDR).
+- Bluetooth&#174; stack and profile level APIs for embedded Bluetooth&#174; application development.
+- AIROC&#8482; HCI protocol to simplify host/MCU application development.
 - APIs and drivers to access on board peripherals.
-- Bluetooth protocols include GAP, GATT, SMP, RFCOMM, SDP, LE Mesh.
+- Bluetooth&#174; protocols include GAP, GATT, SMP, RFCOMM, SDP, LE Mesh.
 - LE and BR profile APIs, libraries, and sample apps.
 - Support for Over-The-Air (OTA) upgrade.
 - Device Configurator for creating custom pin mapping.
-- Bluetooth Configurator for creating LE GATT Database.
+- Bluetooth&#174; Configurator for creating LE GATT Database.
 - Documentation for APIs, datasheet, profiles, and features.
 
 ## Kits Supported

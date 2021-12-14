@@ -32,7 +32,7 @@
  */
  /** @file
  *
- *  This implements the application-thread level event handling for WICED Apps
+ *  This implements the application-thread level event handling for AIROC Apps
  *
  * \defgroup appthread Application Thread Serialization
  * \ingroup  rtos
@@ -64,7 +64,7 @@
  * Global Data Structure definitions                                          *
  ******************************************************************************/
 
- /** Structure used in WICED stack to add callback and data into task queue.  The serialization queue will have these callbacks */
+ /** Structure used in AIROC stack to add callback and data into task queue.  The serialization queue will have these callbacks */
 typedef struct
 {
     int (*fn)(void*); /**< Callback invoked within the app thread context */
@@ -82,7 +82,7 @@ typedef struct
 ****************************************************************************//**
 *
 * This function lets you serialize a call onto the application thread, which
-* has been instantiated by the WICED stack and is used to interact with the
+* has been instantiated by the AIROC stack and is used to interact with the
 * application in an event-based fashion. Once serialized, tasks are pushed onto
 * a task queue, where they are pulled based on pre-defined priority of the
 * application thread. The queue is 16 deep, but this is shared with the stack.

@@ -32,7 +32,7 @@
  */
 /** @file
  *
- * WICED BT App Common Utilities. This file provides the interfaces to the utilities that
+ * AIROC BTSDK App Common Utilities. This file provides the interfaces to the utilities that
  * can be used by the applications
  */
 #include "wiced_gki.h"
